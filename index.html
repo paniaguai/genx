@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PawVibesZ — Generation X &amp; Cats on Zoom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Oswald:wght@300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #0a0e2e;
+      --navy-mid:  #0f1540;
+      --navy-lite: #1a2260;
+      --red:       #e01c2e;
+      --orange:    #f55c1a;
+      --gold:      #f5c518;
+      --cream:     #fdf4e3;
+      --grad-fire: linear-gradient(135deg, var(--red), var(--orange), var(--gold));
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--cream);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,14,46,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--orange);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 2.5rem;
+    }
+    .nav-brand {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1.5rem;
+      background: var(--grad-fire);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem 6rem;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(-55deg, transparent, transparent 40px, rgba(245,92,26,0.04) 40px, rgba(245,92,26,0.04) 41px);
+      pointer-events: none;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      animation: drift 8s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 500px; height: 500px; background: rgba(224,28,46,0.18); top: -100px; left: -150px; }
+    .orb-2 { width: 400px; height: 400px; background: rgba(245,197,24,0.14); bottom: 0; right: -100px; animation-delay: -3s; }
+    .orb-3 { width: 300px; height: 300px; background: rgba(245,92,26,0.16); top: 40%; left: 55%; animation-delay: -5s; }
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px,20px) scale(1.08); }
+    }
+    .hero-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+    .hero-title span {
+      background: var(--grad-fire);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      max-width: 620px;
+      color: rgba(253,244,227,0.8);
+      margin-bottom: 0.5rem;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+    .hero-tagline {
+      font-size: 0.78rem;
+      color: var(--orange);
+      letter-spacing: 0.1em;
+      margin-bottom: 3rem;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+    .hero-cta-group {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 1s 0.4s ease both;
+    }
+    .btn {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.85rem;
+      padding: 0.85rem 2.2rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-fire {
+      background: var(--grad-fire);
+      color: var(--navy);
+      box-shadow: 0 6px 30px rgba(245,92,26,0.5);
+    }
+    .btn-fire:hover { box-shadow: 0 10px 40px rgba(245,92,26,0.7); }
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+    }
+    .btn-outline:hover { background: rgba(245,197,24,0.12); }
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.6rem; letter-spacing: 0.2em; color: rgba(253,244,227,0.4);
+      animation: bob 2s ease-in-out infinite;
+    }
+    .scroll-hint span { font-size: 1.4rem; }
+    @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(24px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* TAPE */
+    .tape {
+      overflow: hidden;
+      background: var(--navy-lite);
+      border-top: 2px solid var(--red);
+      border-bottom: 2px solid var(--red);
+      padding: 0.8rem 0;
+    }
+    .tape-inner {
+      display: flex;
+      white-space: nowrap;
+      animation: tape 20s linear infinite;
+      gap: 2rem;
+    }
+    .tape-item {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    .tape-item::before { content: '🐾 '; }
+    @keyframes tape {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* SECTION BASE */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .fire-line {
+      width: 60px; height: 4px;
+      background: var(--grad-fire);
+      margin-bottom: 2.5rem;
+      border-radius: 2px;
+    }
+
+    /* GEN X SECTION */
+    .genx { background: var(--navy-mid); }
+    .genx-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .genx-text p {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: rgba(253,244,227,0.82);
+      margin-bottom: 1.2rem;
+    }
+    .genx-text strong { color: var(--gold); }
+    .stat-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .stat-card {
+      background: var(--navy-lite);
+      border: 1px solid rgba(245,92,26,0.25);
+      border-radius: 6px;
+      padding: 1.5rem 1.2rem;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .stat-card:hover { border-color: var(--orange); transform: translateY(-4px); }
+    .stat-card .num {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 2.4rem;
+      background: var(--grad-fire);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-card .lbl {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(253,244,227,0.6);
+      margin-top: 0.3rem;
+    }
+
+    /* QUOTE */
+    .quote-block {
+      background: var(--navy-lite);
+      border-left: 6px solid var(--red);
+      padding: 3rem 3.5rem;
+      margin: 4rem 0 0;
+      position: relative;
+    }
+    .quote-block::before {
+      content: '"';
+      position: absolute;
+      top: -0.5rem; left: 1.5rem;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 8rem;
+      color: rgba(224,28,46,0.18);
+      line-height: 1;
+    }
+    .quote-block p {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.6;
+      position: relative;
+    }
+    .quote-attrib {
+      font-size: 0.75rem;
+      color: var(--orange);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    /* WHY CATS */
+    .why { background: var(--navy); }
+    .why-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .why-card {
+      border-left: 4px solid var(--red);
+      background: var(--navy-mid);
+      padding: 1.8rem 1.5rem;
+      border-radius: 0 6px 6px 0;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .why-card:nth-child(2) { border-color: var(--orange); }
+    .why-card:nth-child(3) { border-color: var(--gold); }
+    .why-card:nth-child(4) { border-color: var(--red); }
+    .why-card:hover { transform: translateX(6px); }
+    .why-card .icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+    .why-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+    .why-card p {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: rgba(253,244,227,0.7);
+    }
+
+    /* CULTURE GRID */
+    .culture { background: var(--navy-mid); }
+    .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .culture-card {
+      background: var(--navy);
+      border: 1px solid rgba(245,92,26,0.2);
+      border-radius: 6px;
+      padding: 2rem 1.8rem;
+      transition: transform 0.3s, border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .culture-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .culture-card:nth-child(3n+1)::before { background: var(--red); }
+    .culture-card:nth-child(3n+2)::before { background: var(--orange); }
+    .culture-card:nth-child(3n)::before { background: var(--gold); }
+    .culture-card:hover { transform: translateY(-5px); border-color: var(--orange); }
+    .culture-card .c-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+    .culture-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .culture-card p {
+      font-size: 0.78rem;
+      line-height: 1.85;
+      color: rgba(253,244,227,0.72);
+    }
+
+    /* TIMELINE */
+    .timeline { background: var(--navy); }
+    .tl-items { display: flex; flex-direction: column; max-width: 780px; }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 90px 30px 1fr;
+      gap: 0 1.5rem;
+      align-items: start;
+      padding-bottom: 2.2rem;
+    }
+    .tl-year {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1.1rem;
+      background: var(--grad-fire);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: right;
+      padding-top: 2px;
+    }
+    .tl-dot-col { display: flex; flex-direction: column; align-items: center; }
+    .tl-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 4px;
+    }
+    .tl-item:nth-child(3n+1) .tl-dot { background: var(--red); }
+    .tl-item:nth-child(3n+2) .tl-dot { background: var(--orange); }
+    .tl-item:nth-child(3n) .tl-dot { background: var(--gold); }
+    .tl-line { flex: 1; width: 2px; background: rgba(245,92,26,0.2); margin-top: 6px; }
+    .tl-item:last-child .tl-line { display: none; }
+    .tl-content h4 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+    .tl-content p {
+      font-size: 0.75rem;
+      line-height: 1.7;
+      color: rgba(253,244,227,0.6);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #050816;
+      border-top: 3px solid;
+      border-image: var(--grad-fire) 1;
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 2.5rem;
+      background: var(--grad-fire);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .footer-tagline {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: rgba(253,244,227,0.4);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .footer-links a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.65rem;
+      color: rgba(253,244,227,0.25);
+      letter-spacing: 0.1em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .genx-grid { grid-template-columns: 1fr; }
+      nav { padding: 0.8rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      .quote-block { padding: 2rem; }
+      .tl-item { grid-template-columns: 70px 24px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <p class="hero-eyebrow">⚡ Generation X · Born 1965–1980 · This one's for you</p>
+    <h1 class="hero-title">
+      YOU SURVIVED<br>THE 80s.<br>
+      <span>NOW MEET A CAT.</span>
+    </h1>
+    <p class="hero-sub">PawVibesZ — the world's first live Cats on Zoom platform, built for the generation that raised itself.</p>
+    <p class="hero-tagline">// No algorithm. No fluff. Just a real cat, purring, in real time. //</p>
+    <div class="hero-cta-group">
+      <a href="https://paniaguai.github.io/pawz/" target="_blank" class="btn btn-fire">🐱 Book a Session — €8</a>
+    </div>
+    <div class="scroll-hint"><span>↓</span>SCROLL</div>
+  </section>
+
+  <!-- TAPE 1 -->
+  <div class="tape">
+    <div class="tape-inner">
+      <span class="tape-item">70+ real cats worldwide</span>
+      <span class="tape-item">20+ countries</span>
+      <span class="tape-item">mindful presence</span>
+      <span class="tape-item">live on zoom</span>
+      <span class="tape-item">generation x approved</span>
+      <span class="tape-item">no script, no filter</span>
+      <span class="tape-item">pure purring</span>
+      <span class="tape-item">70+ real cats worldwide</span>
+      <span class="tape-item">20+ countries</span>
+      <span class="tape-item">mindful presence</span>
+      <span class="tape-item">live on zoom</span>
+      <span class="tape-item">generation x approved</span>
+      <span class="tape-item">no script, no filter</span>
+      <span class="tape-item">pure purring</span>
+    </div>
+  </div>
+
+  <!-- GEN X SECTION -->
+  <section class="genx" id="genx">
+    <div class="container">
+      <div class="genx-grid">
+        <div class="genx-text">
+          <p class="section-label">// Who We're Talking To</p>
+          <h2 class="section-title">Generation X:<br>The <span style="color:var(--gold)">Overlooked</span> Generation</h2>
+          <div class="fire-line"></div>
+          <p>You were the <strong>latchkey kids</strong> — home alone after school, MTV on in the background, figuring things out without a manual. Born between 1965 and 1980, Gen Xers number 65 million strong in the US and have spent decades squeezed between Boomers and Millennials.</p>
+          <p>Labeled <strong>slackers</strong> in the 90s, cynical and disaffected — yet research now shows Gen Xers in midlife are active, entrepreneurial, and quietly thriving. You never needed the credit. You just got things done.</p>
+          <p>The "X" itself says it all. Not a number. Not a label. <strong>An unknown variable. A refusal to be defined.</strong> PawVibesZ gets that energy. No wellness theatre. No 12-step ritual. Just a real cat, on a real Zoom, doing whatever it wants.</p>
+          <p>Exactly the kind of no-bullshit calm that <strong>Generation X</strong> has always deserved.</p>
+        </div>
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="num">65M</div>
+            <div class="lbl">Gen Xers in the US</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">1965</div>
+            <div class="lbl">Birth year start</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">1980</div>
+            <div class="lbl">Birth year end</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">X</div>
+            <div class="lbl">Unknown variable — refusing to be defined</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-block">
+        <p>The "X" refers to an unknown variable — or to a desire not to be defined.</p>
+        <div class="quote-attrib">— William Strauss, on Generation X</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE CHARACTERISTICS -->
+  <section class="culture" id="culture">
+    <div class="container">
+      <p class="section-label">// The DNA of a Generation</p>
+      <h2 class="section-title">Generation X<br><span style="background:var(--grad-fire);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Cultural Fingerprint</span></h2>
+      <div class="fire-line"></div>
+      <div class="culture-grid">
+
+        <div class="culture-card">
+          <span class="c-icon">📼</span>
+          <h3>The MTV Generation</h3>
+          <p>Coming of age in the 1980s, Gen X was the first generation shaped by music video culture. MTV didn't just play songs — it rewired how a generation processed identity, style, and rebellion. You didn't just listen to music; you watched it.</p>
+        </div>
+
+        <div class="culture-card">
+          <span class="c-icon">🔑</span>
+          <h3>Latchkey Independence</h3>
+          <p>With rising divorce rates and both parents in the workforce, Gen Xers came home to empty houses and learned self-reliance early. No helicopter parenting. No participation trophies. Free-range childhood built resilience that no app can teach.</p>
+        </div>
+
+        <div class="culture-card">
+          <span class="c-icon">🎮</span>
+          <h3>Born at the Arcade</h3>
+          <p>Video games moved from amusement parlors into the living room on Gen X's watch. Atari, Nintendo, Sega — you didn't just play games, you invented the culture around them. Decades before esports, Gen X was already losing weekends to Pac-Man and Donkey Kong.</p>
+        </div>
+
+        <div class="culture-card">
+          <span class="c-icon">🎸</span>
+          <h3>Genre-Defining Music</h3>
+          <p>Punk rock, hip-hop, heavy metal, grunge, alternative, rave, dance-pop — Gen X didn't have one sound; it had many, each with its own tribe and aesthetic code. Music was identity. Your tape collection said everything about who you were.</p>
+        </div>
+
+        <div class="culture-card">
+          <span class="c-icon">🎬</span>
+          <h3>The VHS & Indie Film Era</h3>
+          <p>Blockbuster nights, franchise mega-sequels, and the rise of independent cinema happened on Gen X's timeline. Video made film accessible and democratized storytelling. Tarantino, Linklater, Jarmusch — the indie directors Gen X loved changed Hollywood permanently.</p>
+        </div>
+
+        <div class="culture-card">
+          <span class="c-icon">🌍</span>
+          <h3>Witnesses to History</h3>
+          <p>Gen X watched the Berlin Wall fall, the Soviet Union collapse, and capitalism reshape the Eastern Bloc — live, on TV, as teenagers. They came of age in the shadow of the Cold War and watched it end. That kind of geopolitical whiplash builds a certain brand of pragmatism.</p>
+        </div>
+
+        <div class="culture-card">
+          <span class="c-icon">💻</span>
+          <h3>First Adopters of the Internet</h3>
+          <p>Gen X didn't grow up with the internet, but they built it — and rebuilt their lives around it multiple times. Dial-up modems, early email, the dot-com boom and bust, social media. No generation has adapted to more technological disruption in a single lifetime.</p>
+        </div>
+
+        <div class="culture-card">
+          <span class="c-icon">🏭</span>
+          <h3>The Entrepreneurial Hustle</h3>
+          <p>Research consistently describes Gen X in midlife as entrepreneurial and productive. Coming of age during economic uncertainty forged a generation of pragmatic self-starters. They didn't wait for institutions to hand them a path — they carved one.</p>
+        </div>
+
+        <div class="culture-card">
+          <span class="c-icon">🤨</span>
+          <h3>Irony as a Mother Tongue</h3>
+          <p>Cynicism wasn't a flaw — it was a coping mechanism and an art form. Douglas Coupland's 1991 novel <em>Generation X: Tales for an Accelerated Culture</em> captured it perfectly: wry, detached, deeply aware that the system was broken but still showing up anyway.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline" id="timeline">
+    <div class="container">
+      <p class="section-label">// A Generation in Context</p>
+      <h2 class="section-title">The <span style="color:var(--orange)">Gen X</span> Timeline</h2>
+      <div class="fire-line"></div>
+      <div class="tl-items">
+
+        <div class="tl-item">
+          <div class="tl-year">1965</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>Generation X Begins</h4>
+            <p>The first Gen Xers are born as the Baby Boom ends. A new demographic cohort — quieter, more skeptical, less celebrated — takes shape in the shadow of the Boomers.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1971–79</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>The Latchkey Years</h4>
+            <p>Rising divorce rates and workforce shifts leave many Gen X children home alone after school. Self-sufficiency isn't a value they were taught — it was a condition they lived.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1981</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>MTV Launches</h4>
+            <p>"I want my MTV." The music video channel transforms pop culture overnight. Gen X teenagers experience music visually for the first time — punk, new wave, hip-hop, and hair metal all competing for the same screen.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1983</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>The Nintendo Era Begins</h4>
+            <p>Video games leave the arcade and enter the living room. A generation of Gen X kids discovers that you can lose an entire Saturday to a screen — a habit that will define tech culture for the next four decades.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1989</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>The Berlin Wall Falls</h4>
+            <p>Gen X teenagers watch the Cold War end on live television. A geopolitical era that defined their childhood dissolves in a single night. The world suddenly feels less certain — and more open.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1991</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>Nirvana's <em>Nevermind</em> & Grunge Goes Global</h4>
+            <p>Grunge explodes from Seattle into the mainstream. Gen X finds its sound: raw, anti-corporate, emotionally honest. Douglas Coupland also publishes <em>Generation X: Tales for an Accelerated Culture</em>, finally naming the cohort.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1994–99</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>The Internet Arrives</h4>
+            <p>Gen X goes online. Dial-up modems, Netscape, AOL, the first wave of the web. Not digital natives — digital immigrants who adapted faster than anyone. They built the infrastructure the next generation takes for granted.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2000s</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>The Sandwich Generation</h4>
+            <p>Gen X hits midlife managing careers, raising kids (often Gen Z), and caring for aging Boomer parents — simultaneously. Research shows they're doing it with surprising resilience: active, productive, and finally achieving work-life balance.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">Now</div>
+          <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h4>PawVibesZ: A Moment Just for You</h4>
+            <p>You've adapted to every wave of change thrown at your generation. You've earned a few minutes of uncomplicated calm. A real cat. A live Zoom. No agenda. Just purring.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TAPE 2 -->
+  <div class="tape" style="border-color:var(--gold)">
+    <div class="tape-inner" style="animation-direction:reverse">
+      <span class="tape-item" style="color:var(--gold)">real. unscripted. purring.</span>
+      <span class="tape-item" style="color:var(--gold)">70+ cats</span>
+      <span class="tape-item" style="color:var(--gold)">50+ specialist hosts</span>
+      <span class="tape-item" style="color:var(--gold)">mindful presence</span>
+      <span class="tape-item" style="color:var(--gold)">one click to calm</span>
+      <span class="tape-item" style="color:var(--gold)">real. unscripted. purring.</span>
+      <span class="tape-item" style="color:var(--gold)">70+ cats</span>
+      <span class="tape-item" style="color:var(--gold)">50+ specialist hosts</span>
+      <span class="tape-item" style="color:var(--gold)">mindful presence</span>
+      <span class="tape-item" style="color:var(--gold)">one click to calm</span>
+    </div>
+  </div>
+
+  <!-- WHY CATS -->
+  <section class="why" id="why">
+    <div class="container">
+      <p class="section-label">// Science Meets Gen X Common Sense</p>
+      <h2 class="section-title">Why <span style="background:var(--grad-fire);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Cats Work</span></h2>
+      <div class="fire-line"></div>
+      <div class="why-cards">
+        <div class="why-card">
+          <span class="icon">😮‍💨</span>
+          <h3>Instant Decompression</h3>
+          <p>Watching a cat purr measurably lowers cortisol. You've been context-switching all day across three devices — three minutes with a cat resets the nervous system in ways no productivity app can replicate.</p>
+        </div>
+        <div class="why-card">
+          <span class="icon">📡</span>
+          <h3>No Algorithm. No Feed.</h3>
+          <p>Gen X grew up before algorithmic curation. PawVibesZ is live, unscripted, and gloriously unpredictable — like channel surfing, but the channel is a cat in Portugal. The cat does not care about your engagement metrics.</p>
+        </div>
+        <div class="why-card">
+          <span class="icon">🌍</span>
+          <h3>The Global Village, Finally</h3>
+          <p>You're meeting a real cat in South Africa, Texas, or the Philippines — hosted by a real person. It's the connected world Gen X was promised in the 90s, actually delivered. No dial-up wait required.</p>
+        </div>
+        <div class="why-card">
+          <span class="icon">⚙️</span>
+          <h3>Gen X Efficiency</h3>
+          <p>No 45-minute wellness retreat. No subscription. PawVibesZ is one Zoom link, €8, a cat, and however long you need. That's it. The whole thing. Built for a generation that always figured it out themselves.</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:3.5rem;">
+        <a href="https://paniaguai.github.io/pawz/" target="_blank" class="btn btn-fire" style="font-size:1rem; padding:1rem 3rem;">Visit PawVibesZ Official Site 🐾</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">PawVibesZ</div>
+    <p class="footer-tagline">The World's First Cats on Zoom Platform · For Generation X</p>
+    <div class="footer-links">
+      <a href="https://paniaguai.github.io/pawz/" target="_blank">Official Site</a>
+      <a href="https://paniaguai.github.io/pawz/" target="_blank">Book a Session</a>
+      <a href="https://en.wikipedia.org/wiki/Generation_X" target="_blank">About Gen X</a>
+    </div>
+    <p class="footer-copy">Made with 🐾 for the generation that never needed a participation trophy · PawVibesZ &copy; 2026</p>
+  </footer>
+
+</body>
+</html>
